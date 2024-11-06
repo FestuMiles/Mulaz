@@ -86,7 +86,7 @@
   .home nav ul li,
   .explore nav ul li,
   .about-us nav ul li {
-    /* margin: 50px 0; */
+    margin: 50px 0;
   }
   .home nav ul li a,
   .explore nav ul li a,

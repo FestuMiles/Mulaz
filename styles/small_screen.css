@@ -38,6 +38,12 @@
 }
 
 @media only screen and (max-width: 750px) {
+  h1 {
+    font-size: 32px;
+  }
+  p {
+    font-size: 18px;
+  }
   .top-bar {
     width: 100%;
   }
@@ -56,7 +62,7 @@
   .home .text,
   .explore .text,
   .about-us .text {
-    padding-top: 120px;
+    padding-top: 150px;
   }
   .home .navigator,
   .explore .navigator,
@@ -80,7 +86,7 @@
   .home nav ul li,
   .explore nav ul li,
   .about-us nav ul li {
-    margin: 50px 0;
+    /* margin: 50px 0; */
   }
   .home nav ul li a,
   .explore nav ul li a,
@@ -93,7 +99,7 @@
     display: list-item;
     list-style: none;
     color: #fff;
-    font-size: 40px;
+    font-size: 30px;
   }
   .home .fa-regular.fa-rectangle-xmark.close,
   .explore .fa-regular.fa-rectangle-xmark.close,
@@ -103,12 +109,50 @@
   .home .fa-solid.fa-bars.menu,
   .explore .fa-solid.fa-bars.menu,
   .about-us .fa-solid.fa-bars.menu {
-    margin-right: 40px;
-    margin-top: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
   }
   .logo {
     margin-left: 40px;
-    margin-top: 10px;
+  }
+  .home .container p,
+  .explore .container p,
+  .about-us .container p {
+    font-size: 20px;
+  }
+
+  /* The service section  */
+  .services .container {
+    display: block;
+  }
+  .services .container div {
+    width: 70%;
+  }
+  .services .container p {
+    width: 100%;
+  }
+
+  /* In Stock Section  */
+  .stock {
+    width: 100%;
+    margin: none;
+    padding: 70px 0;
+  }
+  .stock .container .item {
+    width: 300px;
+    height: 300px;
+  }
+  .stock .container .item .image {
+    height: 200px;
+  }
+  .stock .item h2 {
+    font-size: 18px;
+  }
+  .stock .item h3 {
+    font-size: 14px;
+  }
+  .stock .item img {
+    width: 300px;
   }
 
   /* The footer  */

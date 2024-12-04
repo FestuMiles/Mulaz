@@ -37,7 +37,7 @@ p {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.logo a {
+/* .logo a {
   text-decoration: none;
   color: #fff;
   font-size: 25px;
@@ -46,6 +46,11 @@ p {
 .logo span {
   color: #d60505;
   font-size: 40px;
+} */
+.logo img {
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
 }
 .home i {
   display: none;

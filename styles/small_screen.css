@@ -228,4 +228,8 @@
     position: absolute;
     margin-top: 50px;
   }
+  .footer .social-media i {
+    font-size: 40px;
+    margin-right: 5px;
+  }
 }

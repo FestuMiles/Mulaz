@@ -60,7 +60,9 @@ footer li a {
   margin-left: 5px;
 }
 .footer .social-media i {
-  font-size: 100px;
+  font-size: 50px;
+  color: black;
+  margin-right: 20px;
 }
 .footer .credit {
   text-align: center;

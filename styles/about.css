@@ -40,15 +40,10 @@ p {
 /* .logo img{
       width: 150px;
   } */
-.logo a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 25px;
-  font-weight: 600;
-}
-.logo span {
-  color: #d60505;
-  font-size: 40px;
+.logo img {
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
 }
 .about-us nav {
   margin-top: 10px;

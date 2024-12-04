@@ -12,7 +12,7 @@
   .explore .text,
   .about-us .text {
     width: 80%;
-    align-content: top;
+    align-items: flex-start;
     padding-top: 8%;
     margin-left: 10%;
   }
@@ -135,7 +135,7 @@
   /* In Stock Section  */
   .stock {
     width: 100%;
-    margin: none;
+    margin: 0;
     padding: 70px 0;
   }
   .stock .container .item {
@@ -231,5 +231,15 @@
   .footer .social-media i {
     font-size: 40px;
     margin-right: 5px;
+  }
+
+  .slider-item:nth-child(1) {
+    left: calc(-400px + -40px);
+  }
+  .slider-item:nth-child(2) {
+    left: 10px;
+  }
+  .slider-item:nth-child(3) {
+    left: calc(400px + 20px);
   }
 }

@@ -1,10 +1,25 @@
 :root {
   --nude: #966947;
+  --blue: #0000ff; /* Example variable */
+  --yellow: #ffff00; /* Example variable */
 }
 html {
-  scroll-behavior: smooth;
+  transition: 0.2s linear;
 }
-* {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+ul,
+li,
+button,
+input,
+textarea {
   margin: 0;
   font-family: sans-serif;
   text-transform: capitalize;
@@ -37,13 +52,12 @@ p {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-/* .logo img{
-      width: 150px;
-  } */
 .logo img {
   height: 120px;
   border-radius: 50%;
   position: absolute;
+  top: 5px;
+  left: 5px;
 }
 .about-us nav {
   margin-top: 10px;
@@ -61,19 +75,18 @@ p {
 .top-bar nav ul li {
   list-style: none;
 }
-
 .about-us .container {
   width: 100%;
   height: 50vh;
   margin: auto;
-  /* display: flex; */
-  /* justify-content: space-around; */
+  display: flex;
+  justify-content: space-around;
   background: url(../images/about-image1.jpg);
   background-size: cover;
 }
 .about-us .text {
   width: 38%;
-  align-content: top;
+  align-items: flex-start;
   padding-top: 8%;
   margin-left: 10%;
 }
@@ -89,7 +102,7 @@ p {
   font-weight: 400;
 }
 
-/* The abou section  */
+/* The about section  */
 .about {
   padding: 2rem 5%;
 }
@@ -149,6 +162,68 @@ p {
   padding-top: 1rem;
   line-height: 1.5;
 }
+
+@media only screen and (max-width: 750px) {
+  .about {
+    padding: 2rem 5%;
+  }
+  .heading {
+    text-align: center;
+    /* font-size: 4rem; */
+    color: #333;
+    padding: 1rem;
+    margin-top: 2rem;
+    background: rgba(255, 51, 153, 0.05);
+  }
+  .heading span {
+    color: var(--nude);
+  }
+  .about .row {
+    display: inline-flex;
+    align-items: center;
+    gap: 100px;
+    flex-wrap: wrap;
+    padding-bottom: 3rem;
+  }
+  .about .row .about-pic {
+    flex: 1 1 40rem;
+    position: relative;
+  }
+  .about .row .about-pic img {
+    width: 95%;
+    border: 0.5rem solid #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    height: 100%;
+    object-fit: cover;
+  }
+  .about .row .about-pic h3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #333;
+    background: #fff;
+    width: 100%;
+    padding: 0.5rem 0rem;
+    text-align: center;
+    mix-blend-mode: screen;
+  }
+  .about .row .content {
+    flex: 1 1 40rem;
+  }
+  .about .row .content h3 {
+    font-size: 3rem;
+    color: #333;
+  }
+  .about .row .content p {
+    font-size: 1.5rem;
+    color: #999;
+    padding: 0.5rem 0;
+    padding-top: 1rem;
+    line-height: 1.5;
+  }
+}
 /* The about section end  */
 
 /* -------------------- location ------------------ */
@@ -194,7 +269,7 @@ p {
 }
 
 @media (max-width: 768px) {
-  .contcontact-section .welcome {
+  .contact-section .welcome {
     padding-top: 100px;
     width: 80%;
   }
@@ -274,7 +349,7 @@ p {
   border-radius: 5px;
   width: 200px;
   cursor: pointer;
-  z-index: -1;
+  z-index: 1;
 }
 .contact-col .send-btn:hover {
   border: 1px solid #fc6006;
@@ -298,5 +373,56 @@ p {
     font-size: 20px;
     margin: 10px;
     margin-right: 10px;
+  }
+}
+
+/* Additional media queries for responsiveness */
+@media (max-width: 1024px) {
+  .about-us .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .about-us .text,
+  .about-us .image {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+  }
+  .about .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .about .row .about-pic,
+  .about .row .content {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
+  h1 {
+    font-size: 35px;
+  }
+  p {
+    font-size: 16px;
+  }
+  .top-bar nav ul li a {
+    font-size: 18px;
+    margin: 0 10px;
+  }
+  .about .row .content h3 {
+    font-size: 2rem;
+  }
+  .about .row .content p {
+    font-size: 1.2rem;
+  }
+  .contact-section h1 {
+    font-size: 30px;
+  }
+  .contact-section p {
+    font-size: 18px;
   }
 }

@@ -49,8 +49,9 @@ p {
 } */
 .logo img {
   height: 120px;
-  border-radius: 50%;
   position: absolute;
+  top: 0;
+  left: 0;
 }
 .home i {
   display: none;

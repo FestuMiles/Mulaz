@@ -71,7 +71,7 @@
     padding: 0;
     position: fixed;
     width: 220px;
-    background-color: var(--nude);
+    background-color: #fff;
     min-height: 100vh;
     right: -220px;
     z-index: 2;
@@ -98,7 +98,7 @@
   .about-us i {
     display: list-item;
     list-style: none;
-    color: #fff;
+    color: var(--nude);
     font-size: 30px;
   }
   .home .fa-regular.fa-rectangle-xmark.close,
@@ -112,8 +112,9 @@
     margin-right: 20px;
     margin-top: 10px;
   }
-  .logo {
-    margin-left: 40px;
+  .logo img {
+    height: 60px;
+    left: 10px;
   }
   .home .container p,
   .explore .container p,

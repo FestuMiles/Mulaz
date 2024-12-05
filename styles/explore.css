@@ -33,17 +33,22 @@ p {
 .explore .top-bar {
   display: flex;
   justify-content: space-around;
-  background: #966947;
+  background: #fff;
   padding-top: 20px;
   padding-bottom: 20px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 }
 /* .logo img{
         width: 150px;
     } */
 .logo img {
-  height: 120px;
-  border-radius: 50%;
+  height: 78px;
   position: absolute;
+  top: 0;
+  left: 50px;
 }
 .explore nav {
   margin-top: 10px;
@@ -53,7 +58,7 @@ p {
   justify-content: space-between;
 }
 .top-bar nav ul li a {
-  color: #fff;
+  color: var(--nude);
   margin: 0 20px;
   font-size: 23px;
   text-decoration: none;

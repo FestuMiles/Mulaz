@@ -36,6 +36,10 @@ p {
   background: #fff;
   padding-top: 20px;
   padding-bottom: 20px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 }
 /* .logo a {
   text-decoration: none;

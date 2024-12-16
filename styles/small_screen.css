@@ -13,7 +13,6 @@
   .about-us .text {
     width: 80%;
     align-items: flex-start;
-    padding-top: 8%;
     margin-left: 10%;
   }
   .home .image,
@@ -62,7 +61,7 @@
   .home .text,
   .explore .text,
   .about-us .text {
-    padding-top: 150px;
+    padding-top: 120px;
   }
   .home .navigator,
   .explore .navigator,

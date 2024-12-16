@@ -36,7 +36,7 @@ footer li a {
 
 .contact-btn {
   background: var(--nude);
-  padding: 10px;
+  /* padding: 10px; */
   color: #fff;
 }
 .contact-btn .btn {

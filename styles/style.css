@@ -274,6 +274,7 @@ p {
   overflow: hidden;
   justify-items: center;
   background-color: #fff;
+  padding: 20px 0;
 }
 .stock .container .item {
   width: 400px;
@@ -284,7 +285,7 @@ p {
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  /* margin: 20px; */
 }
 .stock .container .item .image {
   height: 300px;

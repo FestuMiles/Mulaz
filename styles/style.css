@@ -131,6 +131,8 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-gap: 40px;
   margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   overflow: hidden;
   justify-items: center;
 }

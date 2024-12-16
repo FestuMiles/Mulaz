@@ -131,16 +131,14 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-gap: 40px;
   margin-top: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
   overflow: hidden;
   justify-items: center;
+  padding: 20px 0;
 }
 .services .container div {
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  padding-bottom: 20px;
+  padding: 40px 40px 20px 40px;
 }
 .services .container h2 {
   /* color: #966947; */

@@ -127,7 +127,8 @@
     display: block;
   }
   .services .container div {
-    width: 70%;
+    width: 80%;
+    margin: 50px 0;
   }
   .services .container p {
     width: 100%;

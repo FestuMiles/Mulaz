@@ -40,7 +40,7 @@ footer li a {
   color: #fff;
 }
 .contact-btn .btn {
-  border: 5px solid #fff;
+  border: 3px solid #fff;
 }
 .contact-btn a {
   color: #fff;
@@ -55,10 +55,6 @@ footer li a {
   position: absolute;
   right: 0;
 }
-.footer .social-media img {
-  height: 40px;
-  margin-left: 5px;
-}
 .footer .social-media i {
   font-size: 50px;
   color: black;
@@ -72,6 +68,21 @@ footer li a {
 footer .content span.list {
   color: #fff;
   margin-right: 5px;
-  /* position: absolute; */
   margin-top: 50px;
+}
+@media only screen and (max-width: 750px) {
+  footer {
+    padding: 10px 0;
+    padding-bottom: 0;
+  }
+  footer .content {
+    width: 100%;
+  }
+  footer .content h2 {
+    font-size: 18px;
+  }
+  footer .content {
+    display: inline-block;
+    /* justify-content: space-around; */
+  }
 }

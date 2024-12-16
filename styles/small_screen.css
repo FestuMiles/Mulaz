@@ -237,21 +237,23 @@
     /* align-items: center; */
   }
   .contact-btn .btn {
-    border: 5px solid #fff;
+    border: 3px solid #fff;
     display: flex;
-    width: 200px;
+    width: 150px;
     justify-content: space-around;
   }
   .contact-btn a {
-    color: #fff;
-    text-decoration: none;
+    font-size: 18px;
   }
   .footer .credit {
     position: absolute;
     margin-top: 50px;
   }
+  .footer .credit p {
+    font-size: 14px;
+  }
   .footer .social-media i {
-    font-size: 40px;
+    font-size: 30px;
     margin-right: 5px;
   }
 

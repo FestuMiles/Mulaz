@@ -122,6 +122,23 @@
     font-size: 20px;
   }
 
+  /* The best selling section  */
+  .slider-item img {
+    width: 320px;
+  }
+  .best-selling .container {
+    min-height: 50vh;
+  }
+  .best-selling .container .slider {
+    height: 350px;
+  }
+  .slider .slider-item {
+    height: 350px;
+  }
+  .slider .slider-item .image {
+    height: 250px;
+  }
+
   /* The service section  */
   .services .container {
     display: block;

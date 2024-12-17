@@ -163,6 +163,7 @@ p {
 @media only screen and (max-width: 750px) {
   .about {
     padding: 2rem 5%;
+    padding-bottom: 0;
   }
   .heading {
     text-align: center;
@@ -236,51 +237,6 @@ p {
   width: 100%;
 }
 
-/* the contact section  */
-.contact-section {
-  /* background: linear-gradient(to top, rgba(4,9,30,0.5),rgba(4,9,30,0.5)), url(Images/1.jpg); */
-  background: var(--blue);
-  background-size: cover;
-  width: 90%;
-  margin: auto;
-}
-
-.contact-section .welcome {
-  width: 80%;
-  text-align: left;
-  margin: auto;
-}
-
-.contact-section h1 {
-  font-size: 40px;
-  padding-bottom: 3px;
-  color: #fff;
-  font-weight: 600;
-  font-style: normal;
-}
-.contact-section p {
-  color: #fff;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-size: 22px;
-}
-
-@media (max-width: 768px) {
-  .contact-section .welcome {
-    padding-top: 100px;
-    width: 80%;
-  }
-
-  .contact-section h1 {
-    font-size: 35px;
-    padding-bottom: 3px;
-    color: var(--yellow);
-  }
-  .contact-section p {
-    font-size: 16px;
-  }
-}
-
 /* -------------------- contact us -------------------- */
 .contact-us {
   width: 80%;
@@ -309,7 +265,7 @@ p {
   width: 40px;
 }
 .contact-col div h5 {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 5px;
   color: #555;
   font-weight: 400;

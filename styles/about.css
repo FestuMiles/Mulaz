@@ -87,22 +87,8 @@ p {
   background: url(../images/about-image1.jpg);
   background-size: cover;
 }
-.about-us .text {
-  width: 38%;
-  align-items: flex-start;
-  padding-top: 8%;
-  margin-left: 10%;
-}
-.about-us .image {
-  width: 55%;
-}
 .about-us h1 {
   color: #966947;
-}
-.about-us p {
-  margin: 40px 0;
-  color: #966947;
-  font-weight: 400;
 }
 
 /* The about section  */
@@ -116,6 +102,14 @@ p {
   padding: 1rem;
   margin-top: 2rem;
   background: rgba(255, 51, 153, 0.05);
+}
+.about p {
+  font-size: 1.5rem;
+  color: #999;
+  padding: 0.5rem 0;
+  padding-top: 1rem;
+  line-height: 1.5;
+  text-transform: none;
 }
 .heading span {
   color: var(--nude);
@@ -381,16 +375,6 @@ p {
 
 /* Additional media queries for responsiveness */
 @media (max-width: 1024px) {
-  .about-us .container {
-    flex-direction: column;
-    height: auto;
-  }
-  .about-us .text,
-  .about-us .image {
-    width: 100%;
-    margin: 0;
-    padding: 20px;
-  }
   .about .row {
     flex-direction: column;
     gap: 20px;
@@ -407,7 +391,7 @@ p {
     padding: 10px 15px;
   }
   h1 {
-    font-size: 35px;
+    font-size: 25px;
   }
   p {
     font-size: 16px;

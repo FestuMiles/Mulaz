@@ -101,18 +101,15 @@ p {
 .furniture-section {
   width: 90%;
   margin: auto;
-  padding: 70px;
+  padding: 70px 0;
 }
 .furniture-section h1 {
-  text-align: left;
+  text-align: center;
   font-size: 28px;
   padding: 10px;
   margin: 2rem 0;
   background: rgba(150, 105, 71, 1);
   color: #fff;
-}
-.furniture-section h1 {
-  text-align: center;
 }
 .furniture-section p {
   text-align: center;
@@ -121,7 +118,7 @@ p {
 }
 .furniture-section .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 40px;
   margin-top: 50px;
   overflow: hidden;
@@ -129,7 +126,7 @@ p {
   background-color: #fff;
 }
 .furniture-section .container .item {
-  width: 400px;
+  width: 300px;
   position: relative;
   height: 400px;
   /* max-height: 300px; */
@@ -157,7 +154,7 @@ p {
 .furniture-section .item img {
   /* max-width: 400px; */
   max-height: 100%;
-  width: 400px;
+  width: 100%;
   object-fit: contain;
   /* object-fit: contain; */
   border-radius: 0.5rem 0.5rem 0 0;

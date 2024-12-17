@@ -25,6 +25,9 @@
   .about-us h1 {
     color: #966947;
   }
+  .explore h1 {
+    margin-top: 100px;
+  }
   .home p,
   .explore p,
   .about-us p {
@@ -59,7 +62,6 @@
     /* padding-bottom: 20px; */
   }
   .home .text,
-  .explore .text,
   .about-us .text {
     padding-top: 120px;
   }
@@ -264,5 +266,29 @@
   }
   .slider-item:nth-child(3) {
     left: calc(400px + 20px);
+  }
+}
+
+/* The explore page  */
+
+@media only screen and (max-width: 750px) {
+  .furniture-section h1 {
+    font-size: 21px;
+    padding: 5px;
+  }
+}
+
+/* The about page  */
+
+@media only screen and (max-width: 750px) {
+  .heading {
+    font-size: 25px;
+    padding: 0.5rem;
+    margin-top: 0;
+  }
+  .about p {
+    font-size: 21px;
+    padding-top: 1rem;
+    line-height: 1.5;
   }
 }

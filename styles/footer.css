@@ -9,7 +9,7 @@ footer {
   padding: 50px 0;
   margin-top: 100px;
   margin-bottom: 10px;
-  background: var(--nude);
+  background: #333;
 }
 footer .content {
   display: flex;
@@ -35,12 +35,13 @@ footer li a {
 }
 
 .contact-btn {
-  background: var(--nude);
+  background: #333;
   /* padding: 10px; */
   color: #fff;
 }
 .contact-btn .btn {
   border: 3px solid #fff;
+  background-color: #333;
 }
 .contact-btn a {
   color: #fff;

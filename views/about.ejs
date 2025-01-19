@@ -1,0 +1,133 @@
+<%- include('partials/header') %>
+
+<section class="about-us">
+  <div class="container"></div>
+</section>
+
+<!-- the about section -->
+<section class="about" id="about">
+  <h1 class="heading"><span>About</span> Us</h1>
+  <p>
+    Mulaz Wood Craft is a Zambian based company that specializes in making
+    furniture and other wood products. We offer a wide range of products
+    including beds, tables, chairs, wardrobes, and many more. We also offer
+    custom-made products to suit the specific needs of our customers. Our
+    products are available at affordable prices and we offer delivery services
+    to our customers.
+    <br />
+    Having developed a legacy over the years, believing in Zambia and in the
+    Zambian industry. Relying on innovation to design and develop our products,
+    racing up for technology, having the passion for furniture, willing to work
+    had to produce a "Made in Zambia" products to invade and conquer the global
+    market Compromising is unacceptable to our hard core standards. <br />
+    Developing our team to be one positive family is what really MWC is about.
+    <br />
+    Our customers are our partners in success, which is why it is always a long
+    term relationship that is built on trust, respect, and care. At MWC, we do
+    this by creating products that meet the expectations and aspirations of
+    customers who share the same values as we do.
+  </p>
+  <div class="row">
+    <div class="about-pic">
+      <img src="images/about-image1.jpg" alt="images-about" />
+      <h3>Best Furnitures</h3>
+    </div>
+
+    <div class="content">
+      <h3>Why Choose Us?</h3>
+      <p>
+        We are a team of experienced carpenters who are dedicated to providing
+        quality products to our customers. We are committed to providing the
+        best products and services to our customers. Our products are made from
+        high-quality materials and are designed to last for a long time.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- the about section ends  -->
+
+<!-- -------------------- Location --------------------  -->
+<section class="location" id="contact">
+  <h1 class="heading">Contact <span>Us</span></h1>
+
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.64565491373!2d28.317408079828862!3d-15.395665205881826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19408cb1086770bf%3A0xd8632760aa1b2049!2sEIZ%20-%20Engineering%20Institution%20of%20Zambia!5e0!3m2!1sen!2szm!4v1713067449401!5m2!1sen!2szm"
+    width="600"
+    height="450"
+    style="border: 0"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</section>
+
+<section class="contact-us" id="contact-us">
+  <!-- <h1>Contact <span>Us</span></h1> -->
+  <div class="row">
+    <div class="contact-col">
+      <div>
+        <img src="icons/location.png" alt="icon-location" />
+        <span>
+          <h5>Plot 35 Lunsemfya Way</h5>
+          <p>Napsa Complex, Lusaka, Zambia</p>
+        </span>
+      </div>
+      <div>
+        <img src="icons/contact.png" alt="contact-icon" />
+        <span>
+          <h5>
+            Contact Us On: <br />
+            +260 975 361 136 <br />+260 973 338 403
+          </h5>
+          <!-- <p>Working Hours Here</p> -->
+        </span>
+      </div>
+      <div>
+        <img src="icons/email.png" alt="email-icon" />
+        <span>
+          <a href="mailto:mulazwoodcraft@gmail.com" class="email-add"
+            ><h5>@mulazwoodcraft.com</h5></a
+          >
+          <p>Email us your query</p>
+        </span>
+      </div>
+    </div>
+    <div class="contact-col">
+      <form action="#" method="POST">
+        <input
+          type="text"
+          class="box"
+          placeholder="Name"
+          name="name"
+          required
+        />
+        <input
+          type="email"
+          class="box"
+          placeholder="Email"
+          name="email"
+          required
+        />
+        <input
+          type="number"
+          class="box"
+          placeholder="WhatsApp/Contact Number"
+          name="number"
+        />
+        <textarea
+          class="box"
+          placeholder="Message"
+          id=""
+          name="message"
+          rows="5"
+        ></textarea>
+        <div class="my-btn">
+          <input type="submit" value="Send Message" class="btn" />
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+<!-- Compare this snippet from views/partials/footer.ejs: -->

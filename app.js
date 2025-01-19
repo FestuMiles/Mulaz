@@ -13,6 +13,16 @@ app.get('/', (req, res) => {
   res.render('index', { bodycss: 'index.css' });
 });
 
+app.get('/explore', (req, res) => {
+    res.render('explore', { bodycss: 'explore.css' });
+    }
+);
+
+app.get('/about', (req, res) => {
+    res.render('about', { bodycss: 'about.css' });
+    }
+);
+
 
 
 const PORT = process.env.PORT || 3000;

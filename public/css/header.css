@@ -1,5 +1,7 @@
 :root {
     --nude: #966947;
+    --blue: #0000ff; /* Example variable */
+    --yellow: #ffff00; /* Example variable */
   }
   html {
     scroll-behavior: smooth;

@@ -1,0 +1,72 @@
+:root {
+    --nude: #966947;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    margin: 0;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    transition: 0.2s linear;
+  }
+  h1 {
+    font-size: 50px;
+    color: #333;
+  }
+  p {
+    font-size: 18px;
+    color: #999;
+    line-height: 1.5;
+  }
+  .btn {
+    text-decoration: none;
+    font-size: 23px;
+    color: #fff;
+    background: #966947;
+    border-radius: 5px;
+    padding: 5px 20px;
+  }
+  .header {
+    width: 100%;
+    overflow: hidden;
+  }
+  .header .top-bar {
+    display: flex;
+    justify-content: space-around;
+    background: #333;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+  }
+  .logo img {
+    height: 76px;
+    position: absolute;
+    top: 0;
+    left: 50px;
+  }
+  .header i {
+    display: none;
+  }
+  .header nav {
+    margin-top: 10px;
+  }
+  .top-bar nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+  .top-bar nav ul li a {
+    color: #fff;
+    margin: 0 20px;
+    font-size: 23px;
+    text-decoration: none;
+  }
+  .top-bar nav ul li {
+    list-style: none;
+  }
+    .top-bar nav ul li a:hover {
+        color: var(--nude);
+    }  

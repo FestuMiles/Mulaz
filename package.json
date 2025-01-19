@@ -1,0 +1,25 @@
+{
+  "name": "mulaz",
+  "version": "1.0.0",
+  "description": "The dynamic version of Mulaz Wood Craft Website using node and express.",
+  "homepage": "https://github.com/FestuMiles/Mulaz#readme",
+  "bugs": {
+    "url": "https://github.com/FestuMiles/Mulaz/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FestuMiles/Mulaz.git"
+  },
+  "license": "ISC",
+  "author": "Festus Mwape & Sarah Ngosa",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}

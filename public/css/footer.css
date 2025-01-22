@@ -78,12 +78,46 @@ footer .content span.list {
   }
   footer .content {
     width: 100%;
+    display: block;
   }
   footer .content h2 {
     font-size: 18px;
   }
-  footer .content {
-    display: inline-block;
-    /* justify-content: space-around; */
+
+  footer .content div {
+    margin: 40px 0;
   }
+  footer .content .links {
+    margin-left: 40px;
+  }
+  .contact-btn {
+    /* background: var(--nude); */
+    /* padding: 10px; */
+    color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+  }
+  .contact-btn .btn {
+    border: 3px solid #fff;
+    display: flex;
+    width: 150px;
+    justify-content: space-around;
+  }
+  .contact-btn a {
+    font-size: 18px;
+  }
+  .footer .credit {
+    position: absolute;
+    margin-top: 50px;
+  }
+  .footer .credit p {
+    font-size: 14px;
+  }
+  .footer .social-media i {
+    font-size: 30px;
+    margin-right: 5px;
+  }
+
 }

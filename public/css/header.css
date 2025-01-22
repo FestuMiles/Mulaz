@@ -109,6 +109,7 @@ p {
   }
   .header nav ul li a {
     font-weight: 600;
+    font-size: 18px;
   }
   .header i {
     display: list-item;

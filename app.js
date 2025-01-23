@@ -1,6 +1,8 @@
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+//Importing an object from the data.js file
+const objects = require('./data.js');
 
 
 const app = express();
@@ -10,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('index', { bodycss: 'index.css' });
+  res.render('index', { bodycss: 'index.css', objects: objects });
 });
 
 app.get('/explore', (req, res) => {

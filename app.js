@@ -17,12 +17,41 @@ const furnitureSchema = {
   tag: String
 };
 
+const categorySchema = {
+  name: String,
+  furnitures: [furnitureSchema]
+};
+
 
 
 //Creating a model
 const Furniture = mongoose.model('Furniture', furnitureSchema);
 
+const Category = mongoose.model('Category', categorySchema);
+
 const price = 300;
+
+const livingRoom = [];
+
+// Furniture.find({tag: 'final'}).then((results) => {
+//   results.forEach((result) => {
+//     console.log(result);
+//     livingRoom.push(result);
+//   });
+//   const newCategory = new Category({
+//     name: 'Final Detail',
+//     furnitures: livingRoom
+//   });
+//   newCategory.save();
+// }).catch((err) => {
+//   console.log(err);
+// });
+
+
+
+
+
+
 
 // const furniture = new Furniture({
 //   name: 'Name of Furniture',
@@ -60,12 +89,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/explore', (req, res) => {
-  Furniture.find({}).then((furniture) => {
-    res.render('explore', { bodycss: 'explore.css', objects: furniture });
+  Category.find({}).then((categories) => {
+    res.render('explore', { bodycss: 'explore.css', categories: categories });
   }).catch((err) => {
     console.log(err);
   });
-    res.render('explore', { bodycss: 'explore.css' });
+    // res.render('explore', { bodycss: 'explore.css' });
     }
 );
 

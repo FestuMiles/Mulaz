@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 //Importing an object from the data.js file
 const objects = require('./data.js');
 const mongoose = require('mongoose');
+const authentication = require('./authentication.js');
 
 //Connecting to the database
 mongoose.connect('mongodb://localhost:27017/furnitureDB');
@@ -79,6 +80,17 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// Ensure the correct paths for static files
+app.use('/item/stock/css', express.static(__dirname + '/public/css'));
+app.use('/item/stock/Scripts', express.static(__dirname + '/public/Scripts'));
+app.use('/item/stock/icons', express.static(__dirname + '/public/icons'));
+app.use('/item/stock/images', express.static(__dirname + '/public/images'));
+
+app.use('/category/css', express.static(__dirname + '/public/css'));
+app.use('/category/Scripts', express.static(__dirname + '/public/Scripts'));
+app.use('/category/icons', express.static(__dirname + '/public/icons'));
+app.use('/category/images', express.static(__dirname + '/public/images'));
+
 app.get('/', (req, res) => {
   Furniture.find({}).then((furniture) => {
     res.render('index', { bodycss: 'index.css', objects: furniture });
@@ -103,7 +115,52 @@ app.get('/about', (req, res) => {
     }
 );
 
+app.get('/item/stock/:itemId', (req, res)=>{
+  Furniture.findOne({_id: req.params.itemId}).then((result)=>{
+    console.log(result);
+    res.render('item', {item: result, bodycss: 'item.css'});
+  }).catch((err) => {
+    console.log(err);
+    res.status(404).send('Item not found');
+  });
+});
 
+app.get('/admin', (req, res)=>{
+  res.render('admin/login',{bodycss: 'login.css'});
+});
+
+app.get('/category/:categoryId', (req, res)=>{
+  Category.findOne({_id: req.params.categoryId}).then((furnitures)=>{
+    console.log(furnitures.furnitures);
+    res.render('admin/manage-furnitures', {name: furnitures.name, furnitures: furnitures.furnitures, bodycss: 'manage-furnitures.css'});
+  });
+});
+app.get('/furniture-categories', (req, res)=>{
+  Category.find({}).then((categories)=>{
+    // categories.forEach((category)=>{
+    //   console.log(category.name);
+    // });
+    res.render('admin/furniture-categories', {categories: categories, bodycss: 'furniture-categories.css'});
+  });
+});
+
+
+app.post('/login', (req, res)=>{
+  
+  authentication.authenticate(req.body.userName, req.body.password).then((authorize)=>{
+    // console.log(authorize);
+    if(authorize === 0){
+      res.send('User not found!');
+    }
+    if(authorize === 1){
+      res.render('admin/dash', {bodycss: 'dash.css'});
+    }
+    if(authorize === -1){
+      res.send('Incorrect Password! Try Again.');
+    }
+  });
+  
+});
 
 const PORT = process.env.PORT || 3000;
 

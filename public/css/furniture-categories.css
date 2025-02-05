@@ -1,0 +1,26 @@
+.categories{
+    min-height: 65vh;
+    width: 80%;
+    margin: 100px auto;
+    
+}
+.categories h1{
+    text-align: center;
+    color: #666;
+}
+.categories a{
+    color: #666;
+}
+.categories .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 40px;
+    text-align: center;
+    margin-top: 30px;
+}
+.categories .container div{
+    height: 150px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    align-content: center;
+}

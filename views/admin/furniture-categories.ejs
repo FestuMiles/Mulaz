@@ -1,0 +1,18 @@
+<%- include('partials/header-admin') %>
+
+
+<section class="categories">
+    <h1>Furniture Categories</h1>
+    <div class="container">
+        <% categories.forEach((object) => { %>
+            <a href="/category/<%= object._id %>">
+                <div><h2><%= object.name %></h2></div>
+            </a>
+        <% }) %>
+        <a href="/category/new">
+            <div><h2>New Category</h2></div>
+        </a>
+    </div>
+</section>
+
+<%- include('partials/footer-admin') %>

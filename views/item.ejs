@@ -1,0 +1,43 @@
+<%- include('partials/header') -%>
+
+    <section class="item-section">
+        <h1>
+            Furniture Details
+        </h1>
+        <div class="container">
+            <div class="image"><img src="<%= item.imageUrl %>" alt="item image" /></div>
+            <div class="desc">
+                <h2><span>Product Name: </span><%= item.name %></h2>
+                <p>
+                    <span>Features:</span>
+
+                    Material: Upholstered in high-quality, soft velvet fabric for a luxurious feel.
+
+                    Color Options: Available in Emerald Green, Royal Blue, Charcoal Gray, and Classic Beige.
+
+                    Frame: Sturdy hardwood frame for durability and longevity.
+
+                    Cushions: High-density foam cushions with pocketed coils provide exceptional comfort and support.
+
+                    Design: Sleek, modern silhouette with tufted backrest and polished brass legs.
+
+                    Dimensions: 84" W x 35" D x 34" H, offering ample seating space for 3-4 people.
+
+                    Additional Features: Removable and washable cushion covers for easy maintenance.
+                </p>
+                <h2><%= item.priceTag %></h2>
+                <!-- <form action="/add-to-order" method="post">
+                <label for="color">Choose a color:</label>
+                <select name="color" id="color">
+                    <option value="emerald-green">Emerald Green</option>
+                    <option value="royal-blue">Royal Blue</option>
+                    <option value="charcoal-gray">Charcoal Gray</option>
+                    <option value="classic-beige">Classic Beige</option>
+                </select>
+                </form> -->
+                <a href="/add-to-order" class="btn">Add to Order</a>
+            </div>
+        </div>
+    </section>
+    
+    <%- include('partials/footer') -%>

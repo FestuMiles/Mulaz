@@ -6,7 +6,6 @@
     <title>Mulaz</title>
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/<%= bodycss%>" />
-    <link rel="stylesheet" href="css/review.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <script
       src="https://kit.fontawesome.com/d86676f4be.js"
@@ -28,9 +27,20 @@
             <ul>
               <li><a href="/">Home</a></li>
               <li><a href="/explore">Explore</a></li>
-              <li><a href="#">Shopping-Cat</a></li>
-              <li><a href="/about">About-Us</a></li>
-              <li><a href="#">Admin</a></li>
+              <li><a href="#">Dash Board</a></li>
+                  <li>
+                    <a href="#">
+                      <i class="fa-solid fa-right-from-bracket logout-icon"></i> Logout
+                    </a>
+                  </li>
+                  <style>
+                    .logout-icon {
+                      color: white;
+                      background-color: white;
+                      padding: 5px;
+                      border-radius: 3px;
+                    }
+                  </style>
             </ul>
           </nav>
         </div>

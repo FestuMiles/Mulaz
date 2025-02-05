@@ -20,13 +20,15 @@
   <h1><%= category.name %></h1>
   <div class="container">
     <% category.furnitures.forEach((object) => { %>
-        <div class="item">
-          <div class="image">
-            <img src="<%= object.imageUrl %>" alt="" />
+        <a href="/item/stock/<%= object._id %>">
+          <div class="item">
+            <div class="image">
+              <img src="<%= object.imageUrl %>" alt="" />
+            </div>
+            <h3><%= object.name %></h3>
+            <h2><%= object.priceTag %></h2>
           </div>
-          <h3><%= object.name %></h3>
-          <h2><%= object.priceTag %></h2>
-        </div>
+        </a>
     <% }); %>
   </div>
 </section>

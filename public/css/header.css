@@ -21,6 +21,9 @@ p {
   color: #999;
   line-height: 1.5;
 }
+a{
+  text-decoration: none;
+}
 .btn {
   text-decoration: none;
   font-size: 23px;

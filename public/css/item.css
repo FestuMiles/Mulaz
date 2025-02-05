@@ -1,0 +1,32 @@
+body{
+    min-height: 100vh;
+}
+.item-section{
+    margin: 100px;
+}
+h1{
+    text-align: center;
+    margin: 40px;
+    color: #666;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+.image{
+    width: 50%;
+}
+.image img{
+    width: 100%;
+    border-radius: 5px;
+}
+.desc{
+    width: 45%;
+}
+.desc h2{
+    color: #666;
+}
+.btn {
+    position: absolute;
+    margin-top: 20px;
+}

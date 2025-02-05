@@ -1,0 +1,33 @@
+<%- include('partials/header-admin') %>
+
+
+<section class="furnitures">
+    <h1><%= name %></h1>
+    <a href="/new-furniture" class="btn"><i></i>New Furniture</a>
+    <div class="container">
+        <% furnitures.forEach((object) => { %>
+            <div class="item">
+                <div class="image">
+                    <img src="<%= object.imageUrl %>" alt="">
+                    <h2><%= object.priceTag %></h2>
+                </div>
+                <div class="desc">
+                    <h2><%= object.name %></h2>
+                    <p>
+
+                    Color Options: Available in Emerald Green, Royal Blue, Charcoal Gray, and Classic Beige.
+                    Cushions: High-density foam cushions with pocketed coils provide exceptional comfort and support.
+                    Dimensions: 84" W x 35" D x 34" H, offering ample seating space for 3-4 people.
+                    Additional Features: Removable and washable cushion covers for easy maintenance.
+                    </p>
+                </div>
+                <div class="actions">
+                    <a href="" class="update">Update</a>
+                    <a href="" class="del">Delete</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+<%- include('partials/footer-admin') %>

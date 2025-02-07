@@ -5,6 +5,24 @@ const bodyParser = require('body-parser');
 const objects = require('./data.js');
 const mongoose = require('mongoose');
 const authentication = require('./authentication.js');
+const multer = require('multer');
+const path = require('path');
+let imageName = '';
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb)=>{
+    cb(null, path.join(__dirname, 'public/images'));
+  },
+  filename: (req, file, cb)=>{
+    console.log(file);
+
+    imageName = Date.now() + path.extname(file.originalname);
+    console.log(imageName);
+    cb(null, imageName);
+  }
+});
+
+const upload = multer({storage: storage});
 
 //Connecting to the database
 mongoose.connect('mongodb://localhost:27017/furnitureDB');
@@ -91,6 +109,11 @@ app.use('/category/Scripts', express.static(__dirname + '/public/Scripts'));
 app.use('/category/icons', express.static(__dirname + '/public/icons'));
 app.use('/category/images', express.static(__dirname + '/public/images'));
 
+app.use('/new-furniture/css', express.static(__dirname + '/public/css'));
+app.use('/new-furniture/Scripts', express.static(__dirname + '/public/Scripts'));
+app.use('/new-furniture/icons', express.static(__dirname + '/public/icons'));
+app.use('/new-furniture/images', express.static(__dirname + '/public/images'));
+
 app.get('/', (req, res) => {
   Furniture.find({}).then((furniture) => {
     res.render('index', { bodycss: 'index.css', objects: furniture });
@@ -115,14 +138,29 @@ app.get('/about', (req, res) => {
     }
 );
 
-app.get('/item/stock/:itemId', (req, res)=>{
-  Furniture.findOne({_id: req.params.itemId}).then((result)=>{
-    console.log(result);
-    res.render('item', {item: result, bodycss: 'item.css'});
-  }).catch((err) => {
+app.get('/item/stock/:objectsId', (req, res)=>{
+  const ids = req.params.objectsId.split('+');
+  const categoryId = ids[1];
+  const itemId = ids[0];
+  Category.findOne({_id: categoryId}).then((results)=>{
+    // console.log(results);
+    const items = results.furnitures;
+    const item = items.find(item => item._id.toString() === itemId);
+    console.log(item);
+    res.render('item', { item: item, bodycss: 'item.css' });
+    // console.log(item);
+  }).catch((err)=>{
     console.log(err);
     res.status(404).send('Item not found');
   });
+  // Furniture.findOne({_id: req.params.itemId}).then((result)=>{
+  //   console.log(req.params.categoryId);
+  //   console.log(result);
+  //   res.render('item', {item: result, bodycss: 'item.css'});
+  // }).catch((err) => {
+  //   console.log(err);
+  //   res.status(404).send('Item not found');
+  // });
 });
 
 app.get('/admin', (req, res)=>{
@@ -132,8 +170,11 @@ app.get('/admin', (req, res)=>{
 app.get('/category/:categoryId', (req, res)=>{
   Category.findOne({_id: req.params.categoryId}).then((furnitures)=>{
     console.log(furnitures.furnitures);
-    res.render('admin/manage-furnitures', {name: furnitures.name, furnitures: furnitures.furnitures, bodycss: 'manage-furnitures.css'});
+    res.render('admin/manage-furnitures', {id: furnitures._id, name: furnitures.name, furnitures: furnitures.furnitures, bodycss: 'manage-furnitures.css'});
   });
+});
+app.get('/new-furniture/:categoryId', (req, res)=>{
+  res.render('admin/add-furniture',{categoryId: req.params.categoryId, bodycss: 'add-furniture.css'});
 });
 app.get('/furniture-categories', (req, res)=>{
   Category.find({}).then((categories)=>{
@@ -144,7 +185,22 @@ app.get('/furniture-categories', (req, res)=>{
   });
 });
 
-
+app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
+  Category.findOne({_id: req.params.categoryId}).then((results)=>{
+    console.log(results);
+    const item = new Furniture({
+      name: req.body.name,
+      price: req.body.price,
+      priceTag: 'K' + req.body.price,
+      imageUrl: 'images/'+imageName,
+      tag: 'default'
+  
+    })
+    results.furnitures.push(item);
+    results.save();
+  });
+  res.send('Image uploaded successfully!');
+});
 app.post('/login', (req, res)=>{
   
   authentication.authenticate(req.body.userName, req.body.password).then((authorize)=>{

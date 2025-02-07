@@ -1,0 +1,30 @@
+<%- include('partials/header-admin') %>
+
+
+<section class="Item">
+    <h1>Add Furniture</h1>
+    <form action="/add-furniture/<%= categoryId %>" method="post" class="form-container" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name of Furniture:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image">
+        </div>
+        <div class="form-group">
+            <label for="desc">Description:</label>
+            <textarea id="desc" name="desc" placeholder="Enter detailed description here"></textarea>
+        </div>
+        <input type="hidden" value="<%= categoryId %>" name="categoryId" id="categoryId">
+        <div class="form-group text-center">
+            <button type="submit" class="submit-button">Add Furniture</button>
+        </div>
+    </form>
+</section>
+
+<%- include('partials/footer-admin') %>

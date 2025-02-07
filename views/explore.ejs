@@ -20,7 +20,7 @@
   <h1><%= category.name %></h1>
   <div class="container">
     <% category.furnitures.forEach((object) => { %>
-        <a href="/item/stock/<%= object._id %>">
+        <a href="/item/stock/<%= object._id %>+<%= category._id%>">
           <div class="item">
             <div class="image">
               <img src="<%= object.imageUrl %>" alt="" />

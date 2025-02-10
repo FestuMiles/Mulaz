@@ -170,7 +170,7 @@ app.get('/admin', (req, res)=>{
 app.get('/category/:categoryId', (req, res)=>{
   Category.findOne({_id: req.params.categoryId}).then((furnitures)=>{
     console.log(furnitures.furnitures);
-    res.render('admin/manage-furnitures', {id: furnitures._id, name: furnitures.name, furnitures: furnitures.furnitures, bodycss: 'manage-furnitures.css'});
+    res.render('admin/manage-furnitures', {categoryId: req.params.categoryId, id: furnitures._id, name: furnitures.name, furnitures: furnitures.furnitures, bodycss: 'manage-furnitures.css'});
   });
 });
 app.get('/new-furniture/:categoryId', (req, res)=>{
@@ -200,6 +200,32 @@ app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
     results.save();
   });
   res.send('Image uploaded successfully!');
+  res.redirect('/category/'+req.params.categoryId);
+});
+const { ObjectId } = require('mongodb');
+
+app.get('/del-furniture/:objectsId', (req, res) => {
+  const ids = req.params.objectsId.split('+');
+  const categoryId = new ObjectId(ids[1]);
+  const itemId = new ObjectId(ids[0]);
+
+  console.log('Category ID:', categoryId);
+  console.log('Item ID:', itemId);
+
+  Category.updateOne(
+    { _id: categoryId },
+    { $pull: { furnitures: { _id: itemId } } }
+  ).then((result) => {
+    console.log('Update result:', result);
+    if (result.modifiedCount > 0) {
+      res.redirect('/category/'+ids[1]);
+    } else {
+      res.status(404).send('Item not found');
+    }
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).send('Error removing item');
+  });
 });
 app.post('/login', (req, res)=>{
   

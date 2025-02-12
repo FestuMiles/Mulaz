@@ -33,7 +33,10 @@ const furnitureSchema = {
   price: Number,
   priceTag: String,
   imageUrl: String,
-  tag: String
+  tag: String,
+  bestSell: Boolean,
+  inStock: Boolean,
+  desc: String
 };
 
 const categorySchema = {
@@ -120,11 +123,22 @@ app.use('/update-furniture/icons', express.static(__dirname + '/public/icons'));
 app.use('/update-furniture/images', express.static(__dirname + '/public/images'));
 
 app.get('/', (req, res) => {
-  Furniture.find({}).then((furniture) => {
-    res.render('index', { bodycss: 'index.css', objects: furniture });
+  Category.find({}).then((categories) => {
+    // let furnitures = []
+    // categories.forEach((category)=>{
+    //   furnitures = furnitures.concat(category.furnitures);
+    // });
+    console.log(categories);
+    res.render('index', {  bodycss: 'index.css', categories: categories });
   }).catch((err) => {
     console.log(err);
   });
+  // Furniture.find({}).then((furniture) => {
+  //   res.render('index', { bodycss: 'index.css', objects: furniture });
+  // }).catch((err) => {
+  //   console.log(err);
+  // });
+
   // res.render('index', { bodycss: 'index.css', objects: objects });
 });
 
@@ -323,6 +337,42 @@ app.post('/login', (req, res)=>{
 
   
 });
+
+// const categoryId = req.body.categoryId;
+// const itemId = req.body.furnitureId;
+// const inStock = true;
+// const bestSell = true;
+// const desc = "Features: Material: Upholstered in high-quality, soft velvet fabric for a luxurious feel. Color Options: Available in Emerald Green, Royal Blue, Charcoal Gray, and Classic Beige. Frame: Sturdy hardwood frame for durability and longevity. Cushions: High-density foam cushions with pocketed coils provide exceptional comfort and support. Design: Sleek, modern silhouette with tufted backrest and polished brass legs. Dimensions: 84\" W x 35\" D x 34\" H, offering ample seating space for 3-4 people. Additional Features: Removable and washable cushion covers for easy maintenance.";
+
+// const filter = { _id: "67980459bc469907ec1a56e8", 'furnitures._id': "6797fa8ec451f95b4141918a" };
+// const update = {
+//   $set: {
+//     'furnitures.$.inStock': true,
+//     'furnitures.$.desc': desc,
+//     'furnitures.$.bestSell': true
+//   }
+// };
+
+// console.log('Filter:', filter);
+// console.log('Update:', update);
+
+// Category.updateOne(filter, update)
+//   .then((result) => {
+//     console.log('Update result:', result);
+//     // res.redirect('/category/' + categoryId);
+//   })
+//   .catch((err) => {
+//     console.log('Error updating item:', err);
+//     // res.status(500).send('Error updating item');
+//   });
+
+
+
+
+
+
+
+
 
 const PORT = process.env.PORT || 3000;
 

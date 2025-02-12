@@ -59,19 +59,21 @@
   <h1><span>Best</span> Selling</h1>
   <div class="container">
     <div class="slider">
-      <% objects.forEach((object) => { %>
-        <% if (object.tag === "best-selling") { %>
-          <div class="slider-item">
-            <a href="/item/stock/<%= object._id %>">
-              <div class="image">
-                <img src="<%= object.imageUrl %>" alt="" />
-              </div>
-              <h3><%= object.name %></h3>
-              <h2><%= object.priceTag %></h2>
-            </a>
-          </div>
-        <% } %>
-      <% }); %>
+      <% categories.forEach((objects)=>{ %>
+        <% objects.furnitures.forEach((object) => { %>
+          <% if (object.bestSell === true) { %>
+            <div class="slider-item">
+              <a href="/item/stock/<%= object._id %>+<%= objects._id%>">
+                <div class="image">
+                  <img src="<%= object.imageUrl %>" alt="" />
+                </div>
+                <h3><%= object.name %></h3>
+                <h2><%= object.priceTag %></h2>
+              </a>
+            </div>
+          <% } %>
+        <% }); %>
+      <% }) %>
     </div>
   </div>
 </section>
@@ -84,19 +86,21 @@
     today!
   </p>
   <div class="container">
-    <% objects.forEach((object) => { %>
-      <% if (object.tag === "in-stock") { %>
-        <a href="/item/stock/<%= object._id %>">
-          <div class="item">
-            <div class="image">
-              <img src=<%= object.imageUrl %> alt="" />
+    <% categories.forEach((objects)=>{ %>
+      <% objects.furnitures.forEach((object) => { %>
+        <% if (object.inStock === true) { %>
+          <a href="/item/stock/<%= object._id %>+<%= objects._id%>">
+            <div class="item">
+              <div class="image">
+                <img src=<%= object.imageUrl %> alt="" />
+              </div>
+              <h3><%= object.name %></h3>
+              <h2><%= object.priceTag %></h2>
             </div>
-            <h3><%= object.name %></h3>
-            <h2><%= object.priceTag %></h2>
-          </div>
-        </a>
-      <% } %>
-    <% }); %>
+          </a>
+        <% } %>
+      <% }); %>
+    <% }) %>
   </div>
   <div class="more-button">
     <a href="/explore" class="btn">View More</a>

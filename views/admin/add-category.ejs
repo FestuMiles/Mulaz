@@ -1,0 +1,17 @@
+<%- include('partials/header-admin') %>
+
+
+<section class="Item">
+    <h1>Add Category</h1>
+    <form action="/add-category" method="post" class="form-container">
+        <div class="form-group">
+            <label for="name">Category Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="submit-button">Add Category</button>
+        </div>
+    </form>
+</section>
+
+<%- include('partials/footer-admin') %>

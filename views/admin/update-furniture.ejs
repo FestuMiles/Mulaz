@@ -1,0 +1,28 @@
+<%- include('partials/header-admin') %>
+
+
+<section class="Item">
+    <h1>Update Furniture</h1>
+    <form action="/update-furniture" method="post" class="form-container">
+        <div class="form-group">
+            <label for="name">Name of Furniture:</label>
+            <input type="text" id="name" name="name" value="<%= item.name %>">
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" value="<%= item.price %>">
+        </div>
+        <div class="form-group">
+            <label for="desc">Description:</label>
+            <textarea id="desc" name="desc" placeholder="Enter detailed description here" ></textarea>
+        </div>
+        <input type="hidden" value="<%= categoryId %>" name="categoryId" id="categoryId">
+        <input type="hidden" value="<%= item._id %>" name="furnitureId" id="furnitureId">
+
+        <div class="form-group text-center">
+            <button type="submit" class="submit-button">Save</button>
+        </div>
+    </form>
+</section>
+
+<%- include('partials/footer-admin') %>

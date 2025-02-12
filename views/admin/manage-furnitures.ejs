@@ -4,6 +4,7 @@
 <section class="furnitures">
     <h1><%= name %></h1>
     <a href="/new-furniture/<%= id %>" class="btn"><i></i>New Furniture</a>
+    <a href="/del-category/<%= id %>" class="btn del"><i></i>Delete Category</a>
     <div class="container">
         <% furnitures.forEach((object) => { %>
             <div class="item">
@@ -22,7 +23,7 @@
                     </p>
                 </div>
                 <div class="actions">
-                    <a href="/update-furniture/<%= id %>" class="update">Update</a>
+                    <a href="/update-furniture/<%= object._id %>+<%= categoryId %>" class="update">Update</a>
                     <a href="/del-furniture/<%= object._id %>+<%= categoryId %>" class="del">Delete</a>
                 </div>
             </div>

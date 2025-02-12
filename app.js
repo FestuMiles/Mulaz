@@ -114,6 +114,11 @@ app.use('/new-furniture/Scripts', express.static(__dirname + '/public/Scripts'))
 app.use('/new-furniture/icons', express.static(__dirname + '/public/icons'));
 app.use('/new-furniture/images', express.static(__dirname + '/public/images'));
 
+app.use('/update-furniture/css', express.static(__dirname + '/public/css'));
+app.use('/update-furniture/Scripts', express.static(__dirname + '/public/Scripts'));
+app.use('/update-furniture/icons', express.static(__dirname + '/public/icons'));
+app.use('/update-furniture/images', express.static(__dirname + '/public/images'));
+
 app.get('/', (req, res) => {
   Furniture.find({}).then((furniture) => {
     res.render('index', { bodycss: 'index.css', objects: furniture });
@@ -176,6 +181,9 @@ app.get('/category/:categoryId', (req, res)=>{
 app.get('/new-furniture/:categoryId', (req, res)=>{
   res.render('admin/add-furniture',{categoryId: req.params.categoryId, bodycss: 'add-furniture.css'});
 });
+app.get('/new-category', (req, res)=>{
+  res.render('admin/add-category',{bodycss: 'add-furniture.css'});
+});
 app.get('/furniture-categories', (req, res)=>{
   Category.find({}).then((categories)=>{
     // categories.forEach((category)=>{
@@ -199,7 +207,7 @@ app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
     results.furnitures.push(item);
     results.save();
   });
-  res.send('Image uploaded successfully!');
+  // res.send('Image uploaded successfully!');
   res.redirect('/category/'+req.params.categoryId);
 });
 const { ObjectId } = require('mongodb');
@@ -227,6 +235,76 @@ app.get('/del-furniture/:objectsId', (req, res) => {
     res.status(500).send('Error removing item');
   });
 });
+app.get('/del-category/:categoryId', (req,res)=>{
+  Category.deleteOne({_id: req.params.categoryId}).then(()=>{
+    res.redirect('/furniture-categories');
+  }).catch((err)=>{
+    console.log(err);
+    res.status(500).send('Error deleting category');
+  });
+});
+app.get('/update-furniture/:objectsId', (req,res)=>{
+  const ids = req.params.objectsId.split('+');
+  const categoryId = ids[1];
+  const itemId = ids[0];
+
+  console.log('Category ID:', categoryId);
+  console.log('Item ID:', itemId);
+
+  Category.findOne({_id: categoryId}).then((results)=>{
+    const item = results.furnitures.find(obj => obj.id === itemId);
+    console.log(item);
+  res.render('admin/update-furniture', {bodycss: 'add-furniture.css', categoryId: categoryId, item: item});
+
+  }).catch((err)=>{
+    console.log(err);
+    res.send('Item not found!');
+  });
+});
+app.post('/update-furniture', (req, res) => {
+  const categoryId = req.body.categoryId;
+  const itemId = req.body.furnitureId;
+  const name = req.body.name;
+  const price = req.body.price;
+  const desc = req.body.desc;
+
+  console.log('CategoryId:', categoryId);
+  console.log('ItemId:', itemId);
+  console.log('Name:', name);
+  console.log('Price:', price);
+  console.log('Desc:', desc);
+
+  const filter = { _id: categoryId, 'furnitures._id': itemId };
+  const update = {
+    $set: {
+      'furnitures.$.name': name,
+      'furnitures.$.price': price,
+      'furnitures.$.priceTag': 'K' + price
+    }
+  };
+
+  console.log('Filter:', filter);
+  console.log('Update:', update);
+
+  Category.updateOne(filter, update)
+    .then((result) => {
+      console.log('Update result:', result);
+      res.redirect('/category/' + categoryId);
+    })
+    .catch((err) => {
+      console.log('Error updating item:', err);
+      res.status(500).send('Error updating item');
+    });
+});
+
+app.post('/add-category', (req,res)=>{
+  const newCategory = new Category({
+    name: req.body.name,
+    furnitures: []
+  });
+    newCategory.save();
+    res.redirect('/furniture-categories');
+});
 app.post('/login', (req, res)=>{
   
   authentication.authenticate(req.body.userName, req.body.password).then((authorize)=>{
@@ -241,6 +319,8 @@ app.post('/login', (req, res)=>{
       res.send('Incorrect Password! Try Again.');
     }
   });
+
+
   
 });
 

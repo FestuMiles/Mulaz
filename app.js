@@ -281,6 +281,9 @@ app.post('/update-furniture', (req, res) => {
   const name = req.body.name;
   const price = req.body.price;
   const desc = req.body.desc;
+  const bestSell = req.body.bestSelling;
+  const inStock = req.body.inStock;
+
 
   console.log('CategoryId:', categoryId);
   console.log('ItemId:', itemId);
@@ -293,7 +296,9 @@ app.post('/update-furniture', (req, res) => {
     $set: {
       'furnitures.$.name': name,
       'furnitures.$.price': price,
-      'furnitures.$.priceTag': 'K' + price
+      'furnitures.$.priceTag': 'K' + price,
+      'furnitures.$.inStock': inStock,
+      'furnitures.$.bestSell': bestSell,
     }
   };
 

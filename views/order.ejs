@@ -1,3 +1,4 @@
+<%- include('partials/header') -%>
 
     <section class="order-section">
         <h1>
@@ -8,8 +9,14 @@
                 <% furnitures.forEach((furniture)=>{ %>
                     <div>
                         <h2><%= furniture.name %></h2>
-                        <div class="image">
-                            <img src="<%= furniture.imageUrl %>" alt="">
+                        <div class="content">
+                            <div class="image">
+                                <img src="<%= furniture.imageUrl %>" alt="">
+                            </div>
+                            <div class="detail">
+                                <p><%= furniture.desc %></p>
+                                <a href="#" class="del">Remove</a>
+                            </div>
                         </div>
                         <h3><%= furniture.priceTag %></h3>
                     </div>
@@ -19,7 +26,9 @@
                 <h2>Summary</h2>
                 <h3>Total Price: K<%= total %></h3>
                 <form action="">
-                    <input type="email" placeholder="Enter email" required>
+                    <input type="text" name="name" id="name" placeholder="Enter your full names" required>
+                    <input type="text" name="phone" placeholder="Enter your contact number">
+                    <input type="email" placeholder="Enter email" name="email" required>
                     <button type="submit">Place Order</button>
                 </form>
             </div>
@@ -29,4 +38,5 @@
     <script>
         // alert("Testing!");
     </script>
+    <%- include('partials/footer') -%>
     

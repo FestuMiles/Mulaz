@@ -1,0 +1,32 @@
+
+    <section class="order-section">
+        <h1>
+            Oder Details
+        </h1>
+        <div class="container">
+            <div class="items">
+                <% furnitures.forEach((furniture)=>{ %>
+                    <div>
+                        <h2><%= furniture.name %></h2>
+                        <div class="image">
+                            <img src="<%= furniture.imageUrl %>" alt="">
+                        </div>
+                        <h3><%= furniture.priceTag %></h3>
+                    </div>
+                <% }) %>
+            </div>
+            <div class="summary">
+                <h2>Summary</h2>
+                <h3>Total Price: K<%= total %></h3>
+                <form action="">
+                    <input type="email" placeholder="Enter email" required>
+                    <button type="submit">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // alert("Testing!");
+    </script>
+    

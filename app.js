@@ -1,6 +1,7 @@
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 //Importing an object from the data.js file
 const objects = require('./data.js');
 const mongoose = require('mongoose');
@@ -21,6 +22,7 @@ const storage = multer.diskStorage({
     cb(null, imageName);
   }
 });
+
 
 const upload = multer({storage: storage});
 
@@ -54,6 +56,7 @@ const Category = mongoose.model('Category', categorySchema);
 const price = 300;
 
 const livingRoom = [];
+const cart = [];
 
 // Furniture.find({tag: 'final'}).then((results) => {
 //   results.forEach((result) => {
@@ -122,6 +125,14 @@ app.use('/update-furniture/Scripts', express.static(__dirname + '/public/Scripts
 app.use('/update-furniture/icons', express.static(__dirname + '/public/icons'));
 app.use('/update-furniture/images', express.static(__dirname + '/public/images'));
 
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: false}
+}));
+
+
 app.get('/', (req, res) => {
   Category.find({}).then((categories) => {
     // let furnitures = []
@@ -166,7 +177,7 @@ app.get('/item/stock/:objectsId', (req, res)=>{
     const items = results.furnitures;
     const item = items.find(item => item._id.toString() === itemId);
     console.log(item);
-    res.render('item', { item: item, bodycss: 'item.css' });
+    res.render('item', { item: item, bodycss: 'item.css', objectsId: req.params.objectsId });
     // console.log(item);
   }).catch((err)=>{
     console.log(err);
@@ -215,8 +226,9 @@ app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
       price: req.body.price,
       priceTag: 'K' + req.body.price,
       imageUrl: 'images/'+imageName,
-      tag: 'default'
-  
+      desc: req.body.desc,
+      bestSell: req.body.bestSell,
+      inStock: req.body.inStock
     })
     results.furnitures.push(item);
     results.save();
@@ -275,6 +287,47 @@ app.get('/update-furniture/:objectsId', (req,res)=>{
     res.send('Item not found!');
   });
 });
+
+app.get('/add-to-order/:objectsId',(req,res)=>{
+  const item = req.params.objectsId;
+  if(!req.session.cart){
+    req.session.cart = [];
+  }
+  req.session.cart.push(item);
+  res.redirect('/item/stock/'+item);
+});
+
+app.get('/order', (req, res) => {
+  let total = 0;
+  const furnitures = [];
+  const list = req.session.cart;
+  const promises = [];
+
+  list.forEach((item) => {
+    const ids = item.split('+');
+    const categoryId = ids[1];
+    const itemId = ids[0];
+
+    const promise = Category.findOne({ _id: categoryId }).then((results) => {
+      const items = results.furnitures;
+      const object = items.find(item => item._id.toString() === itemId);
+      furnitures.push(object);
+      total += object.price;
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    promises.push(promise);
+  });
+
+  Promise.all(promises).then(() => {
+    res.render('order', { furnitures: furnitures, bodycss: 'order.css', total: total });
+  }).catch((err) => {
+    res.status(500).send('Error processing the order');
+  });
+});
+
+
 app.post('/update-furniture', (req, res) => {
   const categoryId = req.body.categoryId;
   const itemId = req.body.furnitureId;

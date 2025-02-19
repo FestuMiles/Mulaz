@@ -61,10 +61,22 @@ async function getUsers(){
     }
 }
 
+async function delUser(userId){
+    try {
+        User.deleteOne({_id: userId}).then(()=>{
+            return 1;
+        });
+    } catch (error) {
+        console.log(error);
+        return 0;
+    }
+}
+
 // authenticate('admin', 'admin1').then(result => console.log(result));
 
 module.exports = {
     createUser,
     authenticate,
-    getUsers
+    getUsers,
+    delUser
 };

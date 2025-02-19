@@ -404,6 +404,15 @@ app.get('/new-user', (req, res)=>{
   }
 });
 
+app.get('/del-user/:userId', (req, res)=>{
+  authentication.delUser(req.params.userId).then((success)=>{
+    res.redirect('/users');
+  }).catch((error)=>{
+    console.log(error);
+    res.send('Ooops! An error occured!');
+  })
+});
+
 app.post('/add-user', (req, res)=>{
   let admin = false;
 
@@ -413,7 +422,7 @@ app.post('/add-user', (req, res)=>{
 
   const name = req.body.name;
   const userName = req.body.userName;
-  const email = req.body.email;
+  const email = 'festusmwape2001@gmail.com';
   const password = req.body.password;
 
   const user = {
@@ -435,17 +444,18 @@ app.post('/add-user', (req, res)=>{
 
   // Set up email data
   const mailOptions = {
-      from: 'festusmwape2001@gmail.com',
-      to: 'festusmwape2001@gmail.com',
+      from: 'www.festusmiles@gmail.com',
+      to: email,
       subject: `Mulaz.com Account Created`,
-      text: `Dear ${name}, \nYour Mulaz account has been created successfully. Find below the login credentials.\nUser Name: ${userName} \nPassword: ${password} \nPlease update your password for security reasons.`
+      text: `Dear ${name}, \nYour Mulaz account has been created successfully. Find below the login credentials.\nUser Name: ${userName} \nPassword: ${password} \nPlease update your password for security reasons.\nClick here: https://localhost:3000/admin`
   };
 
 
   // Send mail with defined transport object
   transporter.sendMail(mailOptions).then(() => {
       console.log('Mail sent successfully!');
-      res.send('Successfully created account!');
+      // res.send('Successfully created account!');
+      res.redirect('/users');
   }).catch((err) => {
       console.log(err);
       res.status(404).send('Account not created! Try Again.');

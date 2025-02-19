@@ -1,0 +1,41 @@
+<%- include('partials/header-admin') %>
+
+<section class="users">
+    <h1>Manage Users</h1>
+    <a href="/new-user" class="btn"><i></i>New User</a>
+    <div class="container">
+        <% users.forEach((user) => { %>
+            <div class="user">
+                <div class="image">
+                    <i></i>
+                </div>
+                <div class="details">
+                    <h2><%= user.userName %></h2>
+                    <p>
+                    <%= user.name %>
+                    <br>
+                    <%= user.email %>
+                    </p>
+                </div>
+                <div class="level">
+                    <p>
+                    <% if(user.admin){ %>
+                        Administrator
+                    <% } else{ %>
+                        Manager
+                    <% } %>
+                    </p>
+                </div>
+                <div class="actions">
+                    <a href="/del-user/<%= user._id %>" class="update">Update</a>
+                    <a href="/del-user/<%= user._id %>" class="del">Delete</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+
+
+
+<%- include('partials/footer-admin') %>

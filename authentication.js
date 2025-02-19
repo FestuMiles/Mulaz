@@ -52,9 +52,19 @@ async function authenticate(user, userPassword) {
     }
 };
 
+async function getUsers(){
+    try {
+        const users = await User.find({});
+        return users;
+    } catch (error) {
+        
+    }
+}
+
 // authenticate('admin', 'admin1').then(result => console.log(result));
 
 module.exports = {
     createUser,
-    authenticate
+    authenticate,
+    getUsers
 };

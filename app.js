@@ -1,5 +1,6 @@
 const express = require('express');
 const ejs = require('ejs');
+require('dotenv').config(); // Load environment variables from .env file
 const bodyParser = require('body-parser');
 const session = require('express-session');
 //Importing an object from the data.js file
@@ -8,6 +9,7 @@ const mongoose = require('mongoose');
 const authentication = require('./authentication.js');
 const multer = require('multer');
 const path = require('path');
+const nodemailer = require('nodemailer'); // Import nodemailer module for sending emails
 let imageName = '';
 
 const storage = multer.diskStorage({
@@ -327,6 +329,129 @@ app.get('/order', (req, res) => {
   });
 });
 
+app.get('/dash-board',(req,res)=>{
+if(!req.session.credentials){
+  res.send('Unauthorized! Please login.');
+}
+else{
+  const name = req.session.credentials[0];
+const pass = req.session.credentials[1];
+
+authentication.authenticate(name, pass).then((authorize)=>{
+  // console.log(authorize);
+  if(authorize === 0){
+    res.send('Unauthorized! Please login.');
+  }
+  if(authorize === 1){
+    res.render('admin/dash', {bodycss: 'dash.css'});
+  }
+  if(authorize === -1){
+    res.send('Incorrect Password! Try Again.');
+  }
+});
+}
+});
+
+app.get('/users', (req,res)=>{
+  if(!req.session.credentials){
+    res.send('Unauthorized! Please login.');
+  }
+  else{
+    const name = req.session.credentials[0];
+  const pass = req.session.credentials[1];
+  
+  authentication.authenticate(name, pass).then((authorize)=>{
+    // console.log(authorize);
+    if(authorize === 0){
+      res.send('Unauthorized! Please login.');
+    }
+    if(authorize === 1){
+      authentication.getUsers().then((users)=>{
+        console.log(users);
+      res.render('admin/users', {bodycss: 'users.css', users: users});
+
+      })
+    }
+    if(authorize === -1){
+      res.send('Incorrect Password! Try Again.');
+    }
+  });
+  }
+});
+
+app.get('/new-user', (req, res)=>{
+  if(!req.session.credentials){
+    res.send('Unauthorized! Please login.');
+  }
+  else{
+    const name = req.session.credentials[0];
+  const pass = req.session.credentials[1];
+  
+  authentication.authenticate(name, pass).then((authorize)=>{
+    // console.log(authorize);
+    if(authorize === 0){
+      res.send('Unauthorized! Please login.');
+    }
+    if(authorize === 1){
+      
+      res.render('admin/add-user', {bodycss: 'add-user.css'});
+
+    }
+    if(authorize === -1){
+      res.send('Incorrect Password! Try Again.');
+    }
+  });
+  }
+});
+
+app.post('/add-user', (req, res)=>{
+  let admin = false;
+
+  if(req.body.level === 'admin'){
+    admin = true;
+  }
+
+  const name = req.body.name;
+  const userName = req.body.userName;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const user = {
+    name: name,
+    userName: userName,
+    email: email,
+    password: password,
+    admin: admin
+  }
+  authentication.createUser(user);
+    // Create a transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+      }
+  });
+
+  // Set up email data
+  const mailOptions = {
+      from: 'festusmwape2001@gmail.com',
+      to: 'festusmwape2001@gmail.com',
+      subject: `Mulaz.com Account Created`,
+      text: `Dear ${name}, \nYour Mulaz account has been created successfully. Find below the login credentials.\nUser Name: ${userName} \nPassword: ${password} \nPlease update your password for security reasons.`
+  };
+
+
+  // Send mail with defined transport object
+  transporter.sendMail(mailOptions).then(() => {
+      console.log('Mail sent successfully!');
+      res.send('Successfully created account!');
+  }).catch((err) => {
+      console.log(err);
+      res.status(404).send('Account not created! Try Again.');
+  });
+  
+});
 
 app.post('/update-furniture', (req, res) => {
   const categoryId = req.body.categoryId;
@@ -378,8 +503,10 @@ app.post('/add-category', (req,res)=>{
     res.redirect('/furniture-categories');
 });
 app.post('/login', (req, res)=>{
-  
-  authentication.authenticate(req.body.userName, req.body.password).then((authorize)=>{
+  const name = req.body.userName;
+  const pass = req.body.password;
+  authentication.authenticate(name, pass).then((authorize)=>{
+    req.session.credentials = [name, pass];
     // console.log(authorize);
     if(authorize === 0){
       res.send('User not found!');

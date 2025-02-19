@@ -1,0 +1,99 @@
+
+
+/* Section styling */
+section.users {
+    margin-top: 50px;
+    max-width:75%;
+    margin: 20px auto;
+    margin-top: 90px;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    min-height: 70vh;
+}
+.users h1{
+    text-align: center;
+}
+
+/* Button styling */
+.users .btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.users .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Container styling */
+.users .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* User card styling */
+.users .user {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(300px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Image styling */
+.users .image i {
+    font-size: 50px;
+    color: #ccc;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Details styling */
+.users .details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.users .details p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Level styling */
+.users .level p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Actions styling */
+.users .actions a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.users .actions .del {
+    background-color: #dc3545;
+}
+.users .actions .update {
+    background-color: #29c13b;
+}
+
+.users .actions .del:hover {
+    background-color: #c82333;
+}

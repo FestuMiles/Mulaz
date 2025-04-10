@@ -6,6 +6,7 @@
         </h1>
         <div class="container">
             <div class="items">
+                <% let num = 0; %>
                 <% furnitures.forEach((furniture)=>{ %>
                     <div>
                         <h2><%= furniture.name %></h2>
@@ -15,7 +16,8 @@
                             </div>
                             <div class="detail">
                                 <p><%= furniture.desc %></p>
-                                <a href="#" class="del">Remove</a>
+                                <a href="/remove-from-order/<%= list[num] %>" class="del">Remove</a>
+                                <% num = num + 1 %>
                             </div>
                         </div>
                         <h3><%= furniture.priceTag %></h3>
@@ -25,10 +27,11 @@
             <div class="summary">
                 <h2>Summary</h2>
                 <h3>Total Price: K<%= total %></h3>
-                <form action="">
+                <form action="/submit-order" method="post">
                     <input type="text" name="name" id="name" placeholder="Enter your full names" required>
                     <input type="text" name="phone" placeholder="Enter your contact number">
                     <input type="email" placeholder="Enter email" name="email" required>
+                    <input type="text" name="total" value="<%= total %>" hidden>
                     <button type="submit">Place Order</button>
                 </form>
             </div>
@@ -36,7 +39,10 @@
     </section>
 
     <script>
-        // alert("Testing!");
+        const inputValue = document.getElementById('message').value;
+        if(inputValue !== 'none'){
+            alert(inputValue);
+        }
     </script>
     <%- include('partials/footer') -%>
     

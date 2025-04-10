@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mulaz</title>
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/<%= bodycss%>" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <script
-      src="https://kit.fontawesome.com/d86676f4be.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <section class="header">
-      <div class="top-bar">
-        <div class="logo">
-          <a href="/"><img src="icons/mulaz_logo.jpg" alt="logo" /></a>
-        </div>
-        <div class="navigator" id="navigator">
-          <nav>
-            <i
-              class="fa-regular fa-rectangle-xmark close"
-              onclick="hideMenu()"
-            ></i>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/explore">Explore</a></li>
-              <li><a href="/dash-board">Dash Board</a></li>
-                  <li>
-                    <a href="#">
-                      <i class="fa-solid fa-right-from-bracket logout-icon"></i> Logout
-                    </a>
-                  </li>
-                  <style>
-                    .logout-icon {
-                      color: white;
-                      background-color: white;
-                      padding: 5px;
-                      border-radius: 3px;
-                    }
-                  </style>
-            </ul>
-          </nav>
-        </div>
-        <i class="fa-solid fa-bars menu" onclick="showMenu()"></i>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mulaz</title>
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/<%= bodycss%>" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <script src="https://kit.fontawesome.com/d86676f4be.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <section class="header">
+    <div class="top-bar">
+      <div class="logo">
+        <a href="/"><img src="icons/mulaz_logo.jpg" alt="logo" /></a>
       </div>
-    </section>
+      <div class="navigator" id="navigator">
+        <nav>
+          <i class="fa-regular fa-rectangle-xmark close" onclick="hideMenu()"></i>
+          <ul>
+            <!-- <li><a href="/">Home</a></li>
+            <li><a href="/explore">Explore</a></li> -->
+            <li><a href="/dash-board">Dash Board</a></li>
+            <li>
+              <a href="/my-profile">
+                <i class="fa-solid fa-circle-user"></i> My Profile
+              </a>
+            </li>
+            <li>
+              <a href="/logout">
+                <i class="fa-solid fa-right-from-bracket logout-icon"></i>Logout
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <i class="fa-solid fa-bars menu" onclick="showMenu()"></i>
+    </div>
+  </section>

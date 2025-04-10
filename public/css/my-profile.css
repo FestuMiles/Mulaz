@@ -4,16 +4,31 @@
 .user h1{
     text-align: center;
 }
+.forms{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 80px;
+}
 
 /* Form container */
 .form-container {
-    width: 100%;
-    max-width: 600px;
+    flex-grow: 1;
+    width: 60%;
+    /* max-width: 600px; */
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
+}
+.password-container{
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    flex-basis: 300px;
 }
 
 /* Form group */

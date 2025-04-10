@@ -48,10 +48,19 @@ const categorySchema = {
   furnitures: [furnitureSchema]
 };
 
+const orderSchema = {
+  customerName: String,
+  customerEmail: String,
+  customerNumber: String,
+  date: String,
+  orders: [String]
+}
 
 
 //Creating a model
 const Furniture = mongoose.model('Furniture', furnitureSchema);
+
+const Order = mongoose.model('Order', orderSchema);
 
 const Category = mongoose.model('Category', categorySchema);
 
@@ -59,6 +68,9 @@ const price = 300;
 
 const livingRoom = [];
 const cart = [];
+
+let message = 'none';
+
 
 // Furniture.find({tag: 'final'}).then((results) => {
 //   results.forEach((result) => {
@@ -105,6 +117,8 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(express.json()); // Parse JSON bodies
+
 
 // Ensure the correct paths for static files
 app.use('/item/stock/css', express.static(__dirname + '/public/css'));
@@ -127,6 +141,11 @@ app.use('/update-furniture/Scripts', express.static(__dirname + '/public/Scripts
 app.use('/update-furniture/icons', express.static(__dirname + '/public/icons'));
 app.use('/update-furniture/images', express.static(__dirname + '/public/images'));
 
+app.use('/update-user/css', express.static(__dirname + '/public/css'));
+app.use('/update-user/Scripts', express.static(__dirname + '/public/Scripts'));
+app.use('/update-user/icons', express.static(__dirname + '/public/icons'));
+app.use('/update-user/images', express.static(__dirname + '/public/images'));
+
 app.use(session({
   secret: 'secret-key',
   resave: false,
@@ -136,12 +155,15 @@ app.use(session({
 
 
 app.get('/', (req, res) => {
+  if(!req.session.cart){
+    req.session.cart = [];
+  }
   Category.find({}).then((categories) => {
     // let furnitures = []
     // categories.forEach((category)=>{
     //   furnitures = furnitures.concat(category.furnitures);
     // });
-    console.log(categories);
+    // console.log(categories);
     res.render('index', {  bodycss: 'index.css', categories: categories });
   }).catch((err) => {
     console.log(err);
@@ -169,7 +191,6 @@ app.get('/about', (req, res) => {
     res.render('about', { bodycss: 'about.css' });
     }
 );
-
 app.get('/item/stock/:objectsId', (req, res)=>{
   const ids = req.params.objectsId.split('+');
   const categoryId = ids[1];
@@ -178,8 +199,9 @@ app.get('/item/stock/:objectsId', (req, res)=>{
     // console.log(results);
     const items = results.furnitures;
     const item = items.find(item => item._id.toString() === itemId);
-    console.log(item);
-    res.render('item', { item: item, bodycss: 'item.css', objectsId: req.params.objectsId });
+    // console.log(item);
+    res.render('item', { item: item, bodycss: 'item.css', objectsId: req.params.objectsId, message: message });
+    message = 'none'
     // console.log(item);
   }).catch((err)=>{
     console.log(err);
@@ -239,6 +261,7 @@ app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
   res.redirect('/category/'+req.params.categoryId);
 });
 const { ObjectId } = require('mongodb');
+const { Console, profile } = require('console');
 
 app.get('/del-furniture/:objectsId', (req, res) => {
   const ids = req.params.objectsId.split('+');
@@ -296,7 +319,21 @@ app.get('/add-to-order/:objectsId',(req,res)=>{
     req.session.cart = [];
   }
   req.session.cart.push(item);
+  message = 'Added successfully!';
   res.redirect('/item/stock/'+item);
+});
+
+app.get('/remove-from-order/:objectsId',(req,res)=>{
+  const item = req.params.objectsId;
+
+  let index = req.session.cart.indexOf(item);
+
+if (index !== -1) {
+  req.session.cart.splice(index, 1);
+}
+
+  message = 'Removed successfully!';
+  res.redirect('/order');
 });
 
 app.get('/order', (req, res) => {
@@ -323,7 +360,8 @@ app.get('/order', (req, res) => {
   });
 
   Promise.all(promises).then(() => {
-    res.render('order', { furnitures: furnitures, bodycss: 'order.css', total: total });
+    res.render('order', { furnitures: furnitures, bodycss: 'order.css', total: total, message: message, list: list });
+    message = 'none';
   }).catch((err) => {
     res.status(500).send('Error processing the order');
   });
@@ -344,6 +382,12 @@ authentication.authenticate(name, pass).then((authorize)=>{
   }
   if(authorize === 1){
     res.render('admin/dash', {bodycss: 'dash.css'});
+  }
+  if(authorize === 2){
+    req.session.credentials = [name, pass, 0];
+    Category.find({}).then((categories)=>{
+      res.render('admin/furniture-categories', {categories: categories, bodycss: 'furniture-categories.css'});
+    });
   }
   if(authorize === -1){
     res.send('Incorrect Password! Try Again.');
@@ -367,7 +411,7 @@ app.get('/users', (req,res)=>{
     }
     if(authorize === 1){
       authentication.getUsers().then((users)=>{
-        console.log(users);
+        // console.log(users);
       res.render('admin/users', {bodycss: 'users.css', users: users});
 
       })
@@ -405,12 +449,121 @@ app.get('/new-user', (req, res)=>{
 });
 
 app.get('/del-user/:userId', (req, res)=>{
-  authentication.delUser(req.params.userId).then((success)=>{
+  if(!req.session.credentials){
+    res.send('Unauthorized! Please login.');
+  }
+  else{
+    const name = req.session.credentials[0];
+  const pass = req.session.credentials[1];
+  
+  authentication.authenticate(name, pass).then((authorize)=>{
+    // console.log(authorize);
+    if(authorize === 0){
+      res.send('Unauthorized! Please login.');
+    }
+    if(authorize === 1){
+      
+      authentication.delUser(req.params.userId).then((success)=>{
+        res.redirect('/users');
+      }).catch((error)=>{
+        console.log(error);
+        res.send('Ooops! An error occured!');
+      });
+
+    }
+    if(authorize === -1){
+      res.send('Incorrect Password! Try Again.');
+    }
+  });
+  }
+});
+
+app.get('/update-user/:userId', (req, res)=>{
+  if(!req.session.credentials){
+    res.send('Unauthorized! Please login.');
+  }
+  else{
+    const name = req.session.credentials[0];
+  const pass = req.session.credentials[1];
+  
+  authentication.authenticate(name, pass).then((authorize)=>{
+    // console.log(authorize);
+    if(authorize === 0){
+      res.send('Unauthorized! Please login.');
+    }
+    if(authorize === 1){
+      
+      authentication.getUser(req.params.userId).then((user)=>{
+        console.log('User to be Updated:');
+        console.log(user);
+        console.log('userId:');
+        console.log(user._id);
+        res.render('admin/update-user', {bodycss: 'add-user.css', user: user});
+      });
+    }
+    if(authorize === -1){
+      res.send('Incorrect Password! Try Again.');
+    }
+  });
+  }
+});
+
+app.get('/my-profile', (req, res)=>{
+  if(!req.session.credentials){
+    res.send('Unauthorized! Please login.');
+  }
+  else{
+    const name = req.session.credentials[0];
+    const pass = req.session.credentials[1];
+  
+  authentication.authenticate(name, pass).then((authorize)=>{
+    // console.log(authorize);
+    if(authorize === 0){
+      res.send('Unauthorized! Please login.');
+    }
+    if(authorize === 1 || authorize === 2){
+      authentication.getUser1(name).then((user)=>{
+        res.render('admin/my-profile',{bodycss: 'my-profile.css', user: user})
+      });
+      
+
+    }
+    if(authorize === -1){
+      res.send('Incorrect Password! Try Again.');
+    }
+  });
+  }
+});
+
+app.get('/logout', (req,res)=>{
+  req.session.credentials = [];
+  res.render('admin/login',{bodycss: 'login.css'});
+});
+
+
+app.post('/update-user', (req, res)=>{
+  const name = req.body.name;
+  const userName = req.body.userName;
+  const email = req.body.email;
+  let admin = false;
+  const userId = req.body.userId;
+
+  if(req.body.level === 'admin'){
+    admin = true;
+  }
+
+  const user = {
+    name: name,
+    userName: userName,
+    email: email,
+    admin: admin,
+    userId: userId
+  }
+
+  authentication.updateUser(user).then((result)=>{
+    console.log(result);
     res.redirect('/users');
-  }).catch((error)=>{
-    console.log(error);
-    res.send('Ooops! An error occured!');
-  })
+  });
 });
 
 app.post('/add-user', (req, res)=>{
@@ -422,7 +575,7 @@ app.post('/add-user', (req, res)=>{
 
   const name = req.body.name;
   const userName = req.body.userName;
-  const email = 'festusmwape2001@gmail.com';
+  const email = req.body.email;
   const password = req.body.password;
 
   const user = {
@@ -432,8 +585,10 @@ app.post('/add-user', (req, res)=>{
     password: password,
     admin: admin
   }
-  authentication.createUser(user);
-    // Create a transporter object using the default SMTP transport
+  authentication.createUser(user).then((result)=>{
+    console.log(result);
+    if(result === 1){
+      // Create a transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -450,6 +605,8 @@ app.post('/add-user', (req, res)=>{
       text: `Dear ${name}, \nYour Mulaz account has been created successfully. Find below the login credentials.\nUser Name: ${userName} \nPassword: ${password} \nPlease update your password for security reasons.\nClick here: https://localhost:3000/admin`
   };
 
+  console.log(mailOptions);
+
 
   // Send mail with defined transport object
   transporter.sendMail(mailOptions).then(() => {
@@ -460,7 +617,13 @@ app.post('/add-user', (req, res)=>{
       console.log(err);
       res.status(404).send('Account not created! Try Again.');
   });
-  
+    }else if(result === 0){
+      res.send('User Already Exist!');
+    }else{
+      res.send('Unable to create user! Try Again.')
+    }
+  });
+    
 });
 
 app.post('/update-furniture', (req, res) => {
@@ -516,20 +679,47 @@ app.post('/login', (req, res)=>{
   const name = req.body.userName;
   const pass = req.body.password;
   authentication.authenticate(name, pass).then((authorize)=>{
-    req.session.credentials = [name, pass];
+    
     // console.log(authorize);
     if(authorize === 0){
       res.send('User not found!');
     }
     if(authorize === 1){
+      req.session.credentials = [name, pass,1];
       res.render('admin/dash', {bodycss: 'dash.css'});
+    }
+    if(authorize === 2){
+      req.session.credentials = [name, pass, 0];
+      Category.find({}).then((categories)=>{
+        // categories.forEach((category)=>{
+        //   console.log(category.name);
+        // });
+        res.render('admin/furniture-categories', {categories: categories, bodycss: 'furniture-categories.css'});
+      });
+      // res.render('admin/furniture-categories', {bodycss: 'furniture-categories.css'});
     }
     if(authorize === -1){
       res.send('Incorrect Password! Try Again.');
     }
   });
+});
 
+app.post('/submit-order', (req, res)=>{
+  const customerName = req.body.name;
+  const customerEmail = req.body.email;
+  const customerNumber = req.body.phone;
+  const cart = req.session.cart;
+  console.log(cart);
 
+  const newOrder = new Order({
+    customerName: customerName,
+    customerEmail: customerEmail,
+    customerNumber: customerNumber,
+    date: new Date().toLocaleDateString(),
+    orders: cart
+  });
+
+  console.log(newOrder);
   
 });
 

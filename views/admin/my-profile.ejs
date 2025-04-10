@@ -1,0 +1,57 @@
+<%- include('partials/header-admin') %>
+
+
+<section class="user">
+    <h1>My Profile</h1>
+    <div class="forms">
+        <form action="/update-user" method="post" class="form-container">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="<%= user.name %>">
+            </div>
+            <div class="form-group">
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" name="userName" value="<%= user.userName %>">
+            </div>
+            <div class="form-group">
+                <label for="email">User Email:</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>">
+            </div>
+            <input type="text" name="userId" value="<%= user._id %>" hidden>
+            <div class="form-group text-center">
+                <button type="submit" class="submit-button">Update</button>
+            </div>
+            <div class="form-group">
+                <select name="level" hidden>
+                    <% if(user.admin){ %>
+                        <option value="admin" selected>Admin</option>
+                        <option value="manager">Manager</option>
+                    <% } else{ %>
+                        <option value="admin">Admin</option>
+                        <option value="manager" selected>Manager</option>
+                    <% } %>
+                </select>
+            </div>
+        </form>
+        <form action="/update-password" method="post" class="password-container">
+            <div class="form-group">
+                <label for="password">Old Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="new-password">
+            </div>
+            <div class="form-group">
+                <label for="new-password2">Re-enter New Password:</label>
+                <input type="password" id="new-password2" name="new-password2">
+            </div>
+            <input type="text" name="userId" value="<%= user._id %>" hidden>
+            <div class="form-group text-center">
+                <button type="submit" class="submit-button">Save</button>
+            </div>
+        </form>
+    </div>
+    </section>
+
+<%- include('partials/footer-admin') %>

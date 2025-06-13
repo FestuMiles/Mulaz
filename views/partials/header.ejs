@@ -8,32 +8,55 @@
     <link rel="stylesheet" href="css/<%= bodycss%>" />
     <link rel="stylesheet" href="css/review.css" />
     <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/output.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script
       src="https://kit.fontawesome.com/d86676f4be.js"
       crossorigin="anonymous"
     ></script>
   </head>
   <body>
-    <section class="header">
-      <div class="top-bar">
-        <div class="logo">
-          <a href="/"><img src="icons/mulaz_logo.jpg" alt="logo" /></a>
-        </div>
-        <div class="navigator" id="navigator">
-          <nav>
-            <i
-              class="fa-regular fa-rectangle-xmark close"
-              onclick="hideMenu()"
-            ></i>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/explore">Explore</a></li>
-              <li><a href="/order">Order-List</a></li>
-              <li><a href="/about">About-Us</a></li>
-              <!-- <li><a href="#">Admin</a></li> -->
-            </ul>
-          </nav>
-        </div>
-        <i class="fa-solid fa-bars menu" onclick="showMenu()"></i>
-      </div>
-    </section>
+    <!-- ── Header / Navbar ─────────────────────────────────────────────── -->
+<header class="fixed inset-x-0 top-0 z-20 bg-gray-900 shadow">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6 lg:px-8">
+    <!-- Logo -->
+    <a href="/" class="flex shrink-0 items-center">
+      <img src="/icons/mulaz_logo.jpg"
+           alt="Mulaz logo"
+           class="h-14 w-auto md:h-20">
+    </a>
+
+    <!-- Desktop links -->
+    <nav class="hidden md:block">
+      <ul class="flex gap-8 text-lg font-semibold tracking-wide">
+        <li><a href="/"        class="text-white hover:text-[#966947]">Home</a></li>
+        <li><a href="/explore" class="text-white hover:text-[#966947]">Explore</a></li>
+        <li><a href="/order"   class="text-white hover:text-[#966947]">Order‑List</a></li>
+        <li><a href="/about"   class="text-white hover:text-[#966947]">About‑Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button id="nav‑open"
+            class="text-3xl text-white md:hidden focus:outline-none">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Mobile slide‑in panel -->
+  <aside id="mobile‑nav"
+         class="fixed inset-y-0 right-0 w-60 translate-x-full transform bg-gray-900 transition-transform duration-300 md:hidden">
+    <div class="flex justify-end p-4">
+      <button id="nav‑close"
+              class="text-3xl text-white focus:outline-none">
+        <i class="fa-regular fa-rectangle-xmark"></i>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-6 px-6 text-lg font-semibold">
+      <a href="/"        class="text-white hover:text-[#966947]">Home</a>
+      <a href="/explore" class="text-white hover:text-[#966947]">Explore</a>
+      <a href="/order"   class="text-white hover:text-[#966947]">Order‑List</a>
+      <a href="/about"   class="text-white hover:text-[#966947]">About‑Us</a>
+    </nav>
+  </aside>
+</header>

@@ -69,7 +69,7 @@
 
   <script src="Scripts/highlights.js"></script>
   <!-- ---------- JavaScript for Toggle Menu ------------ -->
-  <script>
+  <!-- <script>
     var nav = document.getElementById("navigator");
 
     function showMenu() {
@@ -78,7 +78,19 @@
     function hideMenu() {
       nav.style.right = "-220px";
     }
-  </script>
+  </script> -->
+
+<!-- Toggle script (drop at the end of <body>) -->
+<script>
+  const openBtn  = document.getElementById('nav‑open');
+  const closeBtn = document.getElementById('nav‑close');
+  const panel    = document.getElementById('mobile‑nav');
+
+  openBtn.addEventListener('click',  () => panel.classList.remove('translate-x-full'));
+  closeBtn.addEventListener('click', () => panel.classList.add('translate-x-full'));
+</script>
+
+
   <!-- Inporting the js for the best selling slider  -->
   <script type="text/javascript" src="Scripts/index.js"></script>
 </body>

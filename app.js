@@ -242,8 +242,9 @@ app.get('/furniture-categories', (req, res)=>{
   });
 });
 
-app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
-  Category.findOne({_id: req.params.categoryId}).then((results)=>{
+app.post('/add-furniture/:categoryId', upload.single('image'), async (req, res) => {
+  try {
+    const results = await Category.findOne({_id: req.params.categoryId});
     console.log(results);
     const item = new Furniture({
       name: req.body.name,
@@ -253,12 +254,14 @@ app.post('/add-furniture/:categoryId', upload.single('image'), (req, res)=>{
       desc: req.body.desc,
       bestSell: req.body.bestSell,
       inStock: req.body.inStock
-    })
+    });
     results.furnitures.push(item);
-    results.save();
-  });
-  // res.send('Image uploaded successfully!');
-  res.redirect('/category/'+req.params.categoryId);
+    await results.save();
+    res.redirect('/category/'+req.params.categoryId);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error adding furniture');
+  }
 });
 const { ObjectId } = require('mongodb');
 const { Console, profile } = require('console');
@@ -661,13 +664,18 @@ app.post('/update-furniture', (req, res) => {
     });
 });
 
-app.post('/add-category', (req,res)=>{
-  const newCategory = new Category({
-    name: req.body.name,
-    furnitures: []
-  });
-    newCategory.save();
+app.post('/add-category', async (req, res) => {
+  try {
+    const newCategory = new Category({
+      name: req.body.name,
+      furnitures: []
+    });
+    await newCategory.save();
     res.redirect('/furniture-categories');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error adding category');
+  }
 });
 app.post('/login', (req, res)=>{
   const name = req.body.userName;

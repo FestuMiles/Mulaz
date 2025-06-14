@@ -9,21 +9,9 @@
             <div class="desc">
                 <h2><span>Product Name: </span><%= item.name %></h2>
                 <p>
-                    <span>Features:</span>
+                    <span>Description:</span>
 
-                    Material: Upholstered in high-quality, soft velvet fabric for a luxurious feel.
-
-                    Color Options: Available in Emerald Green, Royal Blue, Charcoal Gray, and Classic Beige.
-
-                    Frame: Sturdy hardwood frame for durability and longevity.
-
-                    Cushions: High-density foam cushions with pocketed coils provide exceptional comfort and support.
-
-                    Design: Sleek, modern silhouette with tufted backrest and polished brass legs.
-
-                    Dimensions: 84" W x 35" D x 34" H, offering ample seating space for 3-4 people.
-
-                    Additional Features: Removable and washable cushion covers for easy maintenance.
+                    <%= item.desc %>
                 </p>
                 <h2><%= item.priceTag %></h2>
                 <!-- <form action="/add-to-order" method="post">
@@ -41,10 +29,17 @@
     </section>
     <input type="text" id="message" value="<%= message %>" hidden>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const inputValue = document.getElementById('message').value;
         if(inputValue !== 'none'){
-            alert(inputValue);
+            Swal.fire({
+                title: 'Message',
+                text: inputValue,
+                icon: 'info',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#3085d6'
+            });
         }
     </script>
     

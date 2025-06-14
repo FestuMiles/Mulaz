@@ -36,6 +36,7 @@
   }
   .about-us h1 {
       color: var(--nude);
+
   }
   
   /* The about section  */
@@ -51,7 +52,7 @@
     background: rgba(255, 51, 153, 0.05);
   }
   .about p {
-    font-size: 1.5rem;
+    font-size: 16px;
     color: #999;
     padding: 0.5rem 0;
     padding-top: 1rem;
@@ -62,22 +63,22 @@
     color: var(--nude);
   }
   .about .row {
-    display: inline-flex;
-    align-items: center;
-    gap: 100px;
-    flex-wrap: wrap;
-    padding-bottom: 3rem;
+    /* display: inline-flex; */
+    /* align-items: center; */
+    /* gap: 100px; */
+    /* flex-wrap: wrap; */
+    /* padding-bottom: 3rem; */width: 100%;
   }
   .about .row .about-pic {
     flex: 1 1 40rem;
-    position: relative;
+    /* position: relative; */
   }
   .about .row .about-pic img {
-    width: 100%;
+    width: 96%;
     border: 1.5rem solid #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    height: 100%;
+    height: 90%;
     object-fit: cover;
   }
   .about .row .about-pic h3 {
@@ -87,10 +88,11 @@
     font-size: 3rem;
     color: #333;
     background: #fff;
-    width: 100%;
+    width: 87%;
     padding: 1rem 2rem;
     text-align: center;
     mix-blend-mode: screen;
+    margin: 0;
   }
   .about .row .content {
     flex: 1 1 40rem;
